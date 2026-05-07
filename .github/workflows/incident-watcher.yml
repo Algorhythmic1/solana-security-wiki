@@ -1,0 +1,82 @@
+name: Incident Watcher
+
+on:
+  schedule:
+    # Daily at 14:00 UTC (~10:00 ET, after most US/EU news cycles)
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # Allow manual triggering for testing
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+
+      - name: Run incident watcher
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+        run: |
+          python scripts/watch.py
+
+      - name: Check for new incidents
+        id: check_changes
+        run: |
+          if git diff --quiet src/incidents.json; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: add new Solana security incident(s)"
+          title: "🚨 New Solana security incident(s) detected"
+          body: |
+            Automated incident detection found new entries.
+
+            **Please review carefully before merging:**
+            - Verify the loss amount and date against primary sources
+            - Confirm the incident is actually Solana-related (not just mentioned alongside Solana)
+            - Check that sources are reachable and authoritative
+            - Ensure no duplicates with existing entries
+            - Pay extra attention to entries with `confidence: low`
+
+            See workflow run logs for the source articles that triggered each entry.
+          branch: incident-watcher/auto-update
+          delete-branch: true
+          labels: |
+            automated
+            security-incident
+            needs-review
+
+      - name: Upload run artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: watcher-run-${{ github.run_id }}
+          path: |
+            scripts/output/
+            scripts/logs/
+          retention-days: 30
+          if-no-files-found: ignore

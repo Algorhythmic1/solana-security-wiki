@@ -105,7 +105,7 @@ export function HomePage() {
         reflect a technical vulnerability class.
       </p>
       <p className="page-lede">
-        New: <Link to="/trends">trends in Solana exploitation activity</Link>{" "}
+        Check out <Link to="/trends">trends in Solana exploitation activity</Link>{" "}
         and a <Link to="/checklist">defender checklist</Link> distilled from
         every incident below.
       </p>

@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { ThemeToggle } from "./ThemeToggle";
 
 const WIDE_SIDEBAR_MQ = "(min-width: 901px)";
 
@@ -173,6 +174,9 @@ export function Layout() {
         )}
       </aside>
       <main id="main-content" className="main" tabIndex={-1}>
+        <div className="main-top-bar">
+          <ThemeToggle />
+        </div>
         <Outlet />
       </main>
     </div>

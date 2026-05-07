@@ -1,10 +1,16 @@
 :root {
-  color-scheme: dark;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --touch-min: 2.75rem;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --radius: 10px;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #0c0d10;
   --bg-elevated: #13151b;
   --bg-card: #181b24;
@@ -16,10 +22,61 @@
   --link: #7eb6ff;
   --danger: #f07178;
   --ok: #7fd99a;
-  --font-sans: "DM Sans", system-ui, sans-serif;
-  --font-display: "Fraunces", Georgia, serif;
-  --radius: 10px;
   --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --sidebar-bg: rgba(19, 21, 27, 0.92);
+  --body-grad-a: rgba(232, 184, 74, 0.08);
+  --body-grad-b: rgba(126, 182, 255, 0.05);
+  --tap-highlight: rgba(232, 184, 74, 0.15);
+  --checklist-mark-bg: rgba(232, 184, 74, 0.05);
+  --callout-bg: rgba(232, 184, 74, 0.06);
+  --range-fill-a: rgba(232, 184, 74, 0.22);
+  --range-fill-b: rgba(126, 182, 255, 0.18);
+  --dot-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --dot-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --pill-critical-bd: #c44c54;
+  --pill-critical-fg: #ffb4b9;
+  --pill-high-bd: #b87a2a;
+  --pill-high-fg: #ffd49a;
+  --pill-medium-bd: #6a7a9a;
+  --pill-medium-fg: #c5d0eb;
+  --pill-low-bd: #4a5a4a;
+  --pill-low-fg: #b8d4b8;
+  --skip-fg: #0c0d10;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f5f9;
+  --bg-elevated: #e8eaef;
+  --bg-card: #ffffff;
+  --border: #c5cddc;
+  --text: #161922;
+  --text-muted: #5a6275;
+  --accent: #a67c00;
+  --accent-dim: #8a6600;
+  --link: #1565c0;
+  --danger: #c62828;
+  --ok: #2e7d46;
+  --shadow: 0 12px 32px rgba(22, 35, 64, 0.12);
+  --sidebar-bg: rgba(245, 246, 250, 0.94);
+  --body-grad-a: rgba(166, 124, 0, 0.09);
+  --body-grad-b: rgba(21, 101, 192, 0.07);
+  --tap-highlight: rgba(166, 124, 0, 0.18);
+  --checklist-mark-bg: rgba(166, 124, 0, 0.08);
+  --callout-bg: rgba(166, 124, 0, 0.1);
+  --range-fill-a: rgba(166, 124, 0, 0.28);
+  --range-fill-b: rgba(21, 101, 192, 0.2);
+  --dot-shadow: 0 1px 3px rgba(22, 35, 64, 0.2);
+  --dot-shadow-hover: 0 2px 8px rgba(22, 35, 64, 0.22);
+  --pill-critical-bd: #c62828;
+  --pill-critical-fg: #7f1d1d;
+  --pill-high-bd: #d97706;
+  --pill-high-fg: #92400e;
+  --pill-medium-bd: #4f46e5;
+  --pill-medium-fg: #3730a3;
+  --pill-low-bd: #047857;
+  --pill-low-fg: #065f46;
+  --skip-fg: #161922;
 }
 
 *,
@@ -43,8 +100,8 @@ body {
   color: var(--text);
   line-height: 1.55;
   background-image:
-    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(232, 184, 74, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(126, 182, 255, 0.05), transparent);
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--body-grad-a), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, var(--body-grad-b), transparent);
 }
 
 #root {
@@ -58,7 +115,7 @@ body {
   left: var(--safe-left);
   padding: 0.75rem 1rem;
   background: var(--accent);
-  color: var(--bg);
+  color: var(--skip-fg);
   font-weight: 600;
   border-radius: var(--radius);
   z-index: 100;
@@ -108,6 +165,61 @@ code {
   }
 }
 
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+.theme-toggle-icon {
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+.theme-toggle-label {
+  white-space: nowrap;
+}
+
+@media (max-width: 360px) {
+  .theme-toggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .theme-toggle {
+    padding: 0.45rem;
+  }
+}
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -119,7 +231,7 @@ code {
   padding: calc(1.5rem + var(--safe-top)) calc(1.25rem + var(--safe-right)) 2rem
     calc(1.25rem + var(--safe-left));
   border-right: 1px solid var(--border);
-  background: rgba(19, 21, 27, 0.92);
+  background: var(--sidebar-bg);
   backdrop-filter: blur(10px);
   min-width: 0;
 }
@@ -216,7 +328,7 @@ code {
   line-height: 1.35;
   color: var(--text);
   font-size: 0.92rem;
-  -webkit-tap-highlight-color: rgba(232, 184, 74, 0.15);
+  -webkit-tap-highlight-color: var(--tap-highlight);
 }
 .nav-list a:hover {
   color: var(--accent);
@@ -241,10 +353,21 @@ code {
   min-width: 0;
 }
 
+.main-top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: -0.35rem 0 0.75rem;
+}
+
 @media (max-width: 900px) {
   .main {
     padding-top: 1.25rem;
     padding-bottom: calc(2.5rem + var(--safe-bottom));
+  }
+
+  .main-top-bar {
+    margin: -0.15rem 0 0.65rem;
   }
 }
 
@@ -429,21 +552,21 @@ code {
 }
 
 .pill-severity-critical {
-  border-color: #c44c54;
-  color: #ffb4b9;
+  border-color: var(--pill-critical-bd);
+  color: var(--pill-critical-fg);
 }
 .pill-severity-high {
-  border-color: #b87a2a;
-  color: #ffd49a;
+  border-color: var(--pill-high-bd);
+  color: var(--pill-high-fg);
 }
 .pill-severity-medium {
-  border-color: #6a7a9a;
-  color: #c5d0eb;
+  border-color: var(--pill-medium-bd);
+  color: var(--pill-medium-fg);
 }
 .pill-severity-low,
 .pill-severity-informational {
-  border-color: #4a5a4a;
-  color: #b8d4b8;
+  border-color: var(--pill-low-bd);
+  color: var(--pill-low-fg);
 }
 
 .incident-summary {
@@ -537,14 +660,14 @@ code {
   height: 1.1rem;
   border: 1.5px solid var(--accent-dim);
   border-radius: 4px;
-  background: rgba(232, 184, 74, 0.05);
+  background: var(--checklist-mark-bg);
 }
 
 .callout {
   margin: 1.5rem 0;
   padding: 1rem 1.15rem;
   border-left: 3px solid var(--accent);
-  background: rgba(232, 184, 74, 0.06);
+  background: var(--callout-bg);
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
@@ -558,20 +681,12 @@ code {
 }
 
 .toc {
-  position: sticky;
-  top: 1rem;
+  position: static;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0.85rem 1rem;
   margin-bottom: 1.5rem;
   background: var(--bg-elevated);
-}
-
-@media (max-width: 900px) {
-  .toc {
-    position: static;
-    top: auto;
-  }
 }
 
 .toc h3 {
@@ -613,7 +728,8 @@ code {
 /* Timeline range slider (home) */
 .timeline-slider {
   position: relative;
-  z-index: 1;
+  /* Stack above preceding home blocks so tooltips can extend upward unclipped */
+  z-index: 10;
   margin: 1.25rem 0 1.75rem;
   padding: 1rem 0;
   overflow: visible;
@@ -635,6 +751,8 @@ code {
 }
 
 .timeline-slider-hint {
+  position: relative;
+  z-index: 0;
   margin: 0 0 0.75rem;
   font-size: 0.82rem;
   line-height: 1.45;
@@ -679,12 +797,14 @@ code {
 
 .timeline-slider-track-hit {
   position: relative;
+  z-index: 1;
   min-height: 56px;
   margin-bottom: 0.35rem;
   cursor: pointer;
   touch-action: none;
   user-select: none;
-  overflow: hidden;
+  /* visible so dot tooltips can extend above the bar / hint */
+  overflow: visible;
   border-radius: 6px;
 }
 
@@ -707,11 +827,7 @@ code {
   transform: translateY(-50%);
   height: 8px;
   border-radius: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(232, 184, 74, 0.22),
-    rgba(126, 182, 255, 0.18)
-  );
+  background: linear-gradient(90deg, var(--range-fill-a), var(--range-fill-b));
   border: 1px solid var(--accent-dim);
   pointer-events: none;
   box-sizing: border-box;
@@ -721,6 +837,7 @@ code {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  overflow: visible;
 }
 
 .timeline-slider-dot-slot {
@@ -728,6 +845,7 @@ code {
   pointer-events: none;
   transform: translateX(-50%);
   z-index: 2;
+  overflow: visible;
 }
 
 .timeline-slider-dot-slot .timeline-slider-dot {
@@ -740,7 +858,7 @@ code {
   height: 11px;
   border-radius: 50%;
   border: 2px solid var(--bg);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--dot-shadow);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
@@ -775,7 +893,7 @@ code {
 @media (hover: hover) and (pointer: fine) {
   .timeline-slider-dot:hover {
     transform: scale(1.25);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--dot-shadow-hover);
   }
 }
 
@@ -790,7 +908,7 @@ code {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  z-index: 25;
+  z-index: 10000;
   pointer-events: none;
 }
 
@@ -835,7 +953,7 @@ code {
   background: var(--bg-card);
   transform: translate(-50%, -50%);
   cursor: grab;
-  z-index: 10;
+  z-index: 5;
   box-shadow: var(--shadow);
   -webkit-tap-highlight-color: transparent;
 }
