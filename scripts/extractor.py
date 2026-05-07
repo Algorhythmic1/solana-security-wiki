@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 
 log = logging.getLogger(__name__)
 
-MODEL = "claude-opus-4-7"
+MODEL = "claude-opus-4-6"
 USER_AGENT = "incident-watcher/1.0"
 
 # Schema for each incident record. Matches the existing incidents.json structure
