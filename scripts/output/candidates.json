@@ -1,0 +1,266 @@
+[
+  {
+    "title": "How Solana Exchange Drift Plans to Repay Users After $295 Million Crypto Hack",
+    "url": "https://decrypt.co/366897/how-solana-exchange-drift-repay-users-295-million-crypto-hack",
+    "published_date": "2026-05-05T21:25:23+00:00",
+    "snippet": "Solana's Drift Protocol says most of the stolen funds linked to North Korean hackers remain traceable\u2014and it has a plan to make victims whole.",
+    "source_name": "Decrypt",
+    "source_tier": 2
+  },
+  {
+    "title": "Slope Wallets Blamed for $6 Million Solana Hack",
+    "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/slope-wallets-blamed-for-6-million-solana-hack",
+    "published_date": null,
+    "snippet": "\u201cAfter an investigation by developers, ecosystem teams, and security auditors, it appears <strong>affected addresses were at one point created, imported, or used in Slope mobile wallet applications</strong>,\u201d said the Solana devs on Twitter.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Hackers Compromised 8,000 Solana Wallets, Stole $5 Million",
+    "url": "https://www.bitdefender.com/en-us/blog/hotforsecurity/hackers-compromised-8-000-solana-wallets-stole-5-million",
+    "published_date": null,
+    "snippet": "<strong>Hackers attacked the Solana crypto ecosystem with a previously unknown exploit and compromised over 8,000 wallets</strong>, at least so far.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana-Based DeFi Exchange Suffers $285 Million Hack | PYMNTS.com",
+    "url": "https://www.pymnts.com/cryptocurrency/2026/solana-based-defi-exchange-suffers-285-million-hack/",
+    "published_date": "2026-04-02T00:00:00",
+    "snippet": "<strong>Decentralized cryptocurrency exchange Drift has suffered an exploit that drained $285 million in digital assets</strong>. According to a report by Bloomberg News Wednesday (April 1), the incident on the Solana blockchain was flagged by cybersecurity ...",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Over $5.8 Million Drained in Solana Wallet Exploit | Elliptic | Elliptic Connect",
+    "url": "https://www.elliptic.co/blog/analysis/over-5-8-million-drained-in-solana-wallet-exploit",
+    "published_date": null,
+    "snippet": "The root cause is still not clear, but it appears to be due to a flaw in certain wallet software \u2013 rather than in the Solana blockchain itself. All four accounts used to perpetrate the attack were funded by the same account \u2013 indicating that a single hacker was involved. There are also reports that some Ethereum wallets were also drained. Elliptic has taken urgent action to ensure that the exploiters\u2019 addresses have been labelled and available for screening within our tools.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Wallets Targeted in Latest Multimillion-Dollar Hack",
+    "url": "https://www.coindesk.com/markets/2022/08/03/phantom-wallet-exploit-drains-millions-in-sol-tokens",
+    "published_date": "2023-05-11T00:00:00",
+    "snippet": "The Solana ecosystem appears to be the victim of crypto\u2019s latest exploit, with <strong>users reporting their funds have been drained without their knowledge from major internet-connected \u201chot\u201d wallets including Phantom, Slope and TrustWallet</strong>.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "GitHub - MerovingioOps/solana-hacks: The objective of this repository is to show proofs of concept related to vulnerabilities in solana blockchain that are mentioned in many reports but are not exemplified at the code level.",
+    "url": "https://github.com/MerovingioOps/solana-hacks",
+    "published_date": null,
+    "snippet": "This repository includes code that contains known vulnerabilities in the Solana blockchain.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "$285M Solana Hack: The Attack That Changed Crypto Forever - YouTube",
+    "url": "https://www.youtube.com/watch?v=e8nFXPg3z0g",
+    "published_date": null,
+    "snippet": "285 million dollars. One protocol breach. No code bug. <strong>The Drift Protocol hack</strong> on Solana is the largest in its DeFi history and it has turned the whole crypt...",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Drift Protocol Hacked for $285M: The Second Largest Exploit in Solana History",
+    "url": "https://www.mexc.com/learn/article/drift-protocol-hacked-for-285m-the-second-largest-exploit-in-solana-history/1",
+    "published_date": "2026-04-02T00:00:00",
+    "snippet": "Next, the hacker used cross-chain bridges to transfer these stablecoins from the Solana network over to the Ethereum mainnet. On the Ethereum network, the hacker heavily bought ETH. As of 17:45 UTC, the address held 19,913 ETH (worth roughly $42 million). The official Drift Protocol team posted an urgent announcement on X, confirming the exploit and pausing all deposit and withdrawal functions.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "r/solana on Reddit: How does a solana hack happen?",
+    "url": "https://www.reddit.com/r/solana/comments/1idr7lf/how_does_a_solana_hack_happen/",
+    "published_date": "2025-01-30T00:00:00",
+    "snippet": "Most Solana hacks happen due to user mistakes, not the network itself.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Ecosystem Faces One of Largest Hacks Ever \u2014 TradingView News",
+    "url": "https://www.tradingview.com/news/u_today:8f4475e06094b:0-solana-ecosystem-faces-one-of-largest-hacks-ever/",
+    "published_date": "2026-04-01T00:00:00",
+    "snippet": "At $270 million, the Drift exploit slots in between the eighth spot (DMM Bitcoin at $304 million) and the ninth spot (WazirX at $235 million). This makes it the ninth-largest crypto hack of all time across all blockchains. When it comes to Solana-related exploits, Drift becomes the 2nd largest Solana exploit in history.",
+    "source_name": "Brave Search: 'Solana exploit hack'",
+    "source_tier": 3
+  },
+  {
+    "title": "North Korean Hackers Attack Drift Protocol In USD 285 Million Heist | TRM Blog",
+    "url": "https://www.trmlabs.com/resources/blog/north-korean-hackers-attack-drift-protocol-in-285-million-heist",
+    "published_date": "2026-04-03T00:00:00",
+    "snippet": "On April 2, 2026, Drift Protocol confirmed that attackers drained approximately <strong>USD 285 million in user assets on April 1, 2026</strong>. This is the largest DeFi hack of 2026 \u2014 and the second-largest exploit in Solana&#x27;s history, behind only the USD ...",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Drift DeFi Project on Solana Suffers $285 Million Crypto Exploit - Bloomberg",
+    "url": "https://www.bloomberg.com/news/articles/2026-04-01/solana-based-defi-project-drift-hit-by-285-million-exploit",
+    "published_date": "2026-04-02T00:00:00",
+    "snippet": "Drift, a decentralized finance project built on the Solana blockchain, was hit by a hack that drained <strong>nearly $300 million</strong> in digital assets from the protocol, ranking it among the largest exploits in the history of crypto.",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Latest crypto hack sees thieves make off with $280 million from Solana DeFi platform Drift | Fortune",
+    "url": "https://fortune.com/2026/04/02/latest-crypto-hack-sees-thieves-make-off-with-280-million-from-solana-defi-platform-drift/",
+    "published_date": null,
+    "snippet": "The company suffered a <strong>$280 million</strong> hack on Wednesday, and industry experts suspected that North Korea was behind it. ... \u201cEarlier today, a malicious actor gained unauthorized access to Drift Protocol through a novel attack involving durable ...",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana-Based DeFi Project Drift Hit by $285 Million Exploit",
+    "url": "https://news.bloomberglaw.com/business-and-practice/solana-based-defi-project-drift-hit-by-285-million-exploit",
+    "published_date": "2026-04-02T00:00:00",
+    "snippet": "Drift, a decentralized finance project built on the Solana blockchain, was hit by a hack that drained <strong>nearly $300 million</strong> in digital assets from the protocol, ranking it among the largest exploits in the history of crypto.",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "DeFi exploits, on-chain interventions, and the private key: Recent developments in crypto-asset recovery | Travers Smith",
+    "url": "https://www.traverssmith.com/knowledge/knowledge-container/defi-exploits-on-chain-interventions-and-the-private-key-recent-developments-in-crypto-asset-recovery/",
+    "published_date": null,
+    "snippet": "On 1 April 2026, the Drift Protocol, Solana&#x27;s leading decentralised perpetual futures exchange, saw approximately <strong>US$285 million of crypto-assets drained from its vaults in twelve minutes</strong>.",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Here is how Drift attackers drained more than $270 million using a Solana feature designed for convenience",
+    "url": "https://www.coindesk.com/tech/2026/04/02/how-a-solana-feature-designed-for-convenience-let-an-attacker-drain-usd270-million-from-drift",
+    "published_date": "2026-04-02T00:00:00",
+    "snippet": "An attacker drained at least <strong>$270 million</strong> from the Drift Protocol on Solana by abusing a legitimate feature called &#x27;durable nonces,&#x27; rather than exploiting a code bug or stolen keys.",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana's Drift Protocol drained of $285 million through fake token and governance hijack",
+    "url": "https://anonhaven.com/en/news/drift-protocol-hack-285-million-solana/",
+    "published_date": "2026-04-03T00:00:00",
+    "snippet": "At <strong>$285 million</strong>, this is the largest DeFi hack of 2026. It is the second-largest exploit in Solana&#x27;s history, behind only the $326 million Wormhole bridge hack in 2022. TRM Labs noted the post-hack laundering exceeded the pace of the Bybit exploit ...",
+    "source_name": "Brave Search: 'Solana DeFi drained million'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Foundation launches security overhaul days after $270 million Drift exploit",
+    "url": "https://www.coindesk.com/tech/2026/04/07/solana-foundation-unveils-security-overhaul-days-after-usd270-million-drift-exploit",
+    "published_date": null,
+    "snippet": "The Solana Foundation announced ... Drift Protocol suffered a <strong>$270 million exploit carried out by a North Korean state-affiliated group following a six-month social engineering campaign</strong>....",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "Drift Protocol Hack: How Privileged Access Led to a $285M Loss",
+    "url": "https://www.chainalysis.com/blog/lessons-from-the-drift-hack/",
+    "published_date": null,
+    "snippet": "On <strong>1 April, 2026</strong>, Drift Protocol, the largest DeFi protocol on the Solana network, suffered the largest hack of the year so far and the second largest security failure in Solana\u2019s history.",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "History of Solana Security Incidents: A Deep Dive into Outages, Exploits, and Evolution | by Rohit Goyal | Medium",
+    "url": "https://medium.com/@rohitrohitgjpr/history-of-solana-security-incidents-a-deep-dive-into-outages-exploits-and-evolution-a2b9c4d5e4c3",
+    "published_date": "2025-04-29T00:00:00",
+    "snippet": "<strong>Between December 2020 and December 2024, Solana encountered 14 major security incidents</strong>, which fall into three main categories: Core Protocol Failures : Most common in early years, highlighting difficulties in stabilizing novel execution and ...",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "r/solana on Reddit: Major Exploit Hits Drift Protocol on Solana.",
+    "url": "https://www.reddit.com/r/solana/comments/1s9yuss/major_exploit_hits_drift_protocol_on_solana/",
+    "published_date": "2026-04-01T00:00:00",
+    "snippet": "The team confirms this was a <strong>6-month coordinated social engineering campaign</strong>, not a smart contract exploit\u2014attackers posed as a trading firm, built trust across IRL meetings + onchain activity, then compromised contributors via malicious repos ...",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Foundation to Help Secure DeFi Protocols Following $285 Million Drift Hack - Decrypt",
+    "url": "https://decrypt.co/363521/solana-foundation-help-secure-defi-protocols-285-million-drift-hack",
+    "published_date": null,
+    "snippet": "On April 1, the Solana-based Drift Protocol saw <strong>$285 million swiped</strong> in an exploit that\u2019s believed to have been planned for months by North Korean hackers. Nearly a week after a prominent Solana-based decentralized exchange was hit with a $285 ...",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana rolls out 'STRIDE,' a DeFi-wide security push after $285 mln Drift breach - AMBCrypto",
+    "url": "https://ambcrypto.com/solana-rolls-out-stride-a-defi-wide-security-push-after-285-mln-drift-breach/",
+    "published_date": null,
+    "snippet": "For protocols with $100M in TVL and above, the Solana Foundation will support formal security verification. The end goal is to detect threats before they become incidents.",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "Drift Protocol Exploit: Why \u201cSocial Trust\u201d Is the Newest Cybersecurity Gap | Crowell & Moring LLP",
+    "url": "https://www.crowell.com/en/insights/client-alerts/drift-protocol-exploit-why-social-trust-is-the-newest-cybersecurity-gap",
+    "published_date": null,
+    "snippet": "On <strong>April 1, 2026</strong>, Drift Protocol, a decentralized perpetual futures exchange on the Solana blockchain, suffered a security incident resulting in the theft of approximately $285 million in digital assets.",
+    "source_name": "Brave Search: 'Solana protocol security incident'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Rug Pulls & Pump-and-Dumps: What Crypto Institutions Must Know | Solidus Labs",
+    "url": "https://www.soliduslabs.com/reports/solana-rug-pulls-pump-dumps-crypto-compliance",
+    "published_date": null,
+    "snippet": "Regarding rug pulls, it <strong>focuses explicitly on the conduct of the token creator and their behavior around the token launch and subsequent trading</strong>. Its core goal is to provide a clear legal framework for prosecutors to pursue this type of activity.",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "RugCheck - Solana token checker",
+    "url": "https://rugcheck.xyz/",
+    "published_date": null,
+    "snippet": "Scan solana tokens for scams and rug pulls. Use RugCheck.xyz to stay safe and make smarter DeFi decisions.",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "r/solana on Reddit: How do people get away with rug pulls so often?",
+    "url": "https://www.reddit.com/r/solana/comments/1ms17l9/how_do_people_get_away_with_rug_pulls_so_often/",
+    "published_date": "2025-08-16T00:00:00",
+    "snippet": "When you create a toxic environment, you should expect toxic behavior. <strong>When toxic behavior becomes a common occurrence muting your senses, then it just become \u201cnormalized\u201d, aka ppl get away with rug pulls</strong>.",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "SolRPDS: A Dataset for Analyzing Rug Pulls in Solana Decentralized Finance | Proceedings of the Fifteenth ACM Conference on Data and Application Security and Privacy",
+    "url": "https://dl.acm.org/doi/10.1145/3714393.3726487",
+    "published_date": null,
+    "snippet": "Rug pulls in Solana have caused ... A rug pull <strong>occurs when developers exploit users&#x27; trust and drain liquidity from token pools on Decentralized Exchanges (DEXs), leaving users with worthless tokens</strong>....",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "Top 3 Solana Rug Pull detection tools (2026)",
+    "url": "https://smithii.io/en/top-3-solana-rug-pull-detection-tools/",
+    "published_date": null,
+    "snippet": "Its exclusive focus on Solana and fast load times when pulling the latest data on any specific token have made it a must-have tool. It\u2019s now integrated into multiple dApps and bots that rely on its automated analysis. On top of that, its visually striking UI is easy to read even if you\u2019re just starting out, and the range of signals it surfaces lets you assess a project\u2019s legitimacy almost instantly. If you\u2019re into a retro or eye-catching UI, rugcheck.xyz is your Solana rug checker.",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "[2603.24625] SolRugDetector: Investigating Rug Pulls on Solana",
+    "url": "https://arxiv.org/abs/2603.24625",
+    "published_date": "2026-03-25T00:00:00",
+    "snippet": "Our analysis reveals that Rug Pulls on Solana exhibit <strong>extremely short lifecycles, strong price-driven dynamics, severe economic losses, and highly organized group behaviors</strong>. These findings provide insights into the Solana Rug Pull landscape ...",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "Solana Rug Checker: Free Tool to Detect Rug Pulls",
+    "url": "https://rugchecker.com/",
+    "published_date": null,
+    "snippet": "A free and easy-to-use Solana rug check tool. Analyze tokens, holders, and liquidity. We help you avoid rug pulls on the Solana blockchain.",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  },
+  {
+    "title": "[2504.07132] SolRPDS: A Dataset for Analyzing Rug Pulls in Solana Decentralized Finance",
+    "url": "https://arxiv.org/abs/2504.07132",
+    "published_date": "2025-04-06T00:00:00",
+    "snippet": "In this paper, we introduce SolRPDS (Solana Rug Pull Dataset), <strong>the first public rug pull dataset derived from Solana&#x27;s transactions</strong>. We examine approximately four years of DeFi data (2021-2024) that covers suspected and confirmed tokens exhibiting ...",
+    "source_name": "Brave Search: 'Solana rug pull'",
+    "source_tier": 3
+  }
+]
