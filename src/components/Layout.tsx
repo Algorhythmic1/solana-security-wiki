@@ -160,6 +160,12 @@ export function Layout() {
           <li>
             <Link to="/checklist">Defender checklist</Link>
           </li>
+          <li>
+            <Link to="/videos">Video resources</Link>
+          </li>
+          <li>
+            <Link to="/resources">Miscellaneous resources</Link>
+          </li>
         </ul>
 
         {isWideSidebar ? (
