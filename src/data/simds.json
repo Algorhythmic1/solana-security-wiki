@@ -1,0 +1,151 @@
+{
+  "simds": [
+    {
+      "id": "simd-0326-alpenglow",
+      "number": 326,
+      "title": "Alpenglow consensus protocol (Votor)",
+      "phase": "scheduled",
+      "phaseDetail": "Approved by governance (Sep 2025, 98.94% YES). Private cluster testing. Agave 4.1 release targeted Q3 2026, mainnet activation late 2026.",
+      "category": "consensus",
+      "shortDescription": "Replaces Proof-of-History and TowerBFT with Votor — a BLS-aggregated, off-chain voting protocol that reduces deterministic finality from ~12.8s to ~150ms and tolerates 20% Byzantine + 20% offline stake.",
+      "securityImplications": "Alpenglow's safety story is qualitatively different from TowerBFT's. The Votor design provides explicit machine-checked safety and liveness proofs against a 20+20 fault model (20% adversarial, 20% offline) — a level of formal rigor the current protocol does not have. Vote aggregation moves from on-chain transactions (consuming ~75% of block space, exposed to censorship and reordering games) to off-chain BLS aggregation, removing an attack surface where adversarial leaders could selectively include or exclude validator votes. Finality dropping from ~12.8s to ~150ms compresses the window in which an attacker who has compromised a key (multisig signer, hot wallet, oracle) can race a fix or front-run a recovery transaction; this is directly relevant to incidents like Drift, where the laundering window from drain to bridged-out USDC was hours, but pre-signed multisig transactions sat dormant for days.\n\nThe migration itself is the largest single risk. Alpenglow completely replaces consensus, including all voting logic — there is no graceful fallback to TowerBFT once activated. The SIMD acknowledges this explicitly. Three components from the Alpenglow whitepaper (Rotor block propagation, lazy/asynchronous execution, and pool-based stake distribution) are deferred to follow-on SIMDs, meaning the activated version is partial and Solana will run a hybrid (new Votor + old Turbine) consensus stack for some period — a configuration that has not existed before and whose interaction failure modes are only exercisable on mainnet.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": ["simd-0185-vote-account-state", "simd-0296-bls-syscalls"],
+      "sources": [
+        {"label": "SIMD-0326 (proposal)", "url": "https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0326-alpenglow.md"},
+        {"label": "Alpenglow whitepaper v1.1 (Anza)", "url": "https://www.anza.xyz/alpenglow-1-1"},
+        {"label": "Blockworks — governance vote passes", "url": "https://blockworks.com/news/solana-governance-passes-alpenglow"},
+        {"label": "Alchemy — consensus upgrade explained", "url": "https://www.alchemy.com/blog/solana-alpenglow"},
+        {"label": "Helius — Defi Dev Corp on SIMD-0326", "url": "https://defidevcorp.beehiiv.com/p/simd-0326"}
+      ]
+    },
+    {
+      "id": "simd-0204-slashable-event-verification",
+      "number": 204,
+      "title": "Slashable Event Verification",
+      "phase": "scheduled",
+      "phaseDetail": "Accepted. Feature gate activation pending; rollout coordinated with prerequisite SIMD-0180.",
+      "category": "validator_accountability",
+      "shortDescription": "Introduces an on-chain Slashing program (S1ashing11111111111111111111111111111111111) that verifies and records cryptographic proofs of validator misbehavior — initially limited to duplicate block production. No financial penalties yet; this is the verification substrate that future slashing SIMDs build on.",
+      "securityImplications": "SIMD-0204 is the first formal step toward programmatic slashing on Solana, a feature Solana has notably lacked relative to peer Proof-of-Stake networks. Today, validator misbehavior is handled through social coordination — affected stake is identified after the fact, validators are removed from delegation programs, and there is no on-chain economic penalty. This works for honest mistakes but provides no deterrent against deliberate consensus attacks. The September 2022 mainnet halt, caused by a validator producing duplicate blocks in a single slot, took eight hours to resolve and exposed the absence of automated misbehavior accountability.\n\nThe deliberately narrow scope is itself a security choice. By verifying only one violation type (duplicate blocks) and recording proofs without imposing penalties, SIMD-0204 separates the hard problem (cryptographic proof of misbehavior) from the contentious problem (what penalty applies, and how to handle false positives from honest hardware failures). The Slashing program is non-upgradable except through validator software updates, removing a class of governance-attack risk where a compromised authority could disable enforcement. The on-chain ProofReport accounts also create a public, immutable record that delegators, dashboards, and SFDP can use to make informed delegation decisions — moving slashing-adjacent accountability into the network even before slashing itself activates.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": ["simd-0180-vote-account-leader-schedule"],
+      "sources": [
+        {"label": "SIMD-0204 (proposal)", "url": "https://github.com/solana-foundation/solana-improvement-documents/pull/204"},
+        {"label": "Anza — first step to slashing", "url": "https://www.anza.xyz/blog/simd-0204-the-first-step-to-slashing-on-solana"},
+        {"label": "Helius — bringing slashing to Solana", "url": "https://www.helius.dev/blog/bringing-slashing-to-solana"},
+        {"label": "Harkness Institute analysis", "url": "https://medium.com/@hrknsinst/simd-0204-building-the-foundation-for-slashing-on-solana-25ea26daf491"}
+      ]
+    },
+    {
+      "id": "simd-0212-programmatic-slashing",
+      "number": 212,
+      "title": "Programmatic Slashing",
+      "phase": "review",
+      "phaseDetail": "In review. Builds on SIMD-0204; defines economic penalties and slashing percentages. No governance vote scheduled yet.",
+      "category": "validator_accountability",
+      "shortDescription": "Defines actual stake penalties for validator violations recorded by SIMD-0204's Slashing program. Translates verifiable proofs of misbehavior into automatic stake reductions, applied to both validator and delegator stake.",
+      "securityImplications": "SIMD-0212 is where slashing acquires teeth. The interaction with SIMD-0204 follows the standard pattern from Ethereum's beacon chain: 0204 establishes an immutable record of misbehavior, and 0212 attaches economic consequences. The contentious design decisions concentrate here — what percentage of stake is slashed for duplicate blocks vs. consensus-equivocation vs. liveness failures, what fraction of slashed stake is burned vs. redistributed, and how delegator stake is treated when their chosen validator misbehaves. These choices materially affect the delegation market: harsh slashing centralizes stake toward operationally-mature validators (helpful for security, bad for decentralization), while lenient slashing fails to deter genuinely malicious behavior.\n\nThe security upside is well-established from peer networks: programmatic slashing is one of the most effective deterrents against the equivocation and double-signing attacks that compromise consensus safety. The downside is that mature slashing systems also introduce a new failure mode — false-positive slashing from operational mistakes (key rotation errors, multi-instance bugs) can wipe out stake from honest operators. Ethereum's beacon chain has slashed under 0.1% of validators, almost all from operational error rather than malice; the sequencing of 0204 (logging without penalty) before 0212 (penalty) is partly intended to surface false-positive rates before financial consequences attach.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": ["simd-0204-slashable-event-verification"],
+      "sources": [
+        {"label": "Helius — bringing slashing to Solana (covers SIMD-0212)", "url": "https://www.helius.dev/blog/bringing-slashing-to-solana"},
+        {"label": "Anza — slashing roadmap context", "url": "https://www.anza.xyz/blog/simd-0204-the-first-step-to-slashing-on-solana"}
+      ]
+    },
+    {
+      "id": "simd-0180-vote-account-leader-schedule",
+      "number": 180,
+      "title": "Use Vote Account Address to Key Leader Schedule",
+      "phase": "scheduled",
+      "phaseDetail": "Accepted (late 2024). Feature gate activation pending; prerequisite for SIMD-0204 slashing rollout.",
+      "category": "validator_accountability",
+      "shortDescription": "Changes Solana's leader election to key off the vote account public key (which represents staked authority) instead of the validator identity key. Subtle protocol-level change with significant downstream implications for slashing attribution.",
+      "securityImplications": "Today's leader schedule is keyed on validator identity, which is decoupled from the stake account that delegated authority to that validator. This indirection makes it hard to definitively attribute a misbehaving block to a specific quantity of stake — the validator identity could be temporarily controlled by a compromised key, the stake delegation could have moved, or multiple stake accounts could be associated with the same identity. For social coordination this is acceptable. For automated programmatic slashing, this ambiguity is fatal: you cannot deterministically slash 'whichever stake authorized this validator at this slot' without an unambiguous mapping.\n\nSIMD-0180 fixes the substrate. By keying leader election directly on the vote account address, every block-producing slot is tied to a specific staked authority that can be slashed unambiguously. This is why the slashing roadmap depends on it: SIMD-0204 records proofs against vote accounts, SIMD-0212 will slash vote accounts. The change is subtle enough that it has minimal direct user-visible impact, but it is a hard prerequisite for the entire validator accountability story. It also incidentally improves analytics: validator behavior over time can now be tracked against the specific stake that authorized it, rather than requiring inference from off-chain databases.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": [],
+      "sources": [
+        {"label": "SIMD-0180 (proposal)", "url": "https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0180-vote-account-keyed-leader-schedule.md"},
+        {"label": "Helius — slashing prerequisite context", "url": "https://www.helius.dev/blog/bringing-slashing-to-solana"}
+      ]
+    },
+    {
+      "id": "simd-async-execution-roadmap",
+      "number": 324,
+      "title": "Asynchronous Program Execution (roadmap: SIMDs 0083, 0192, 0290, 0295, 0297, 0298, 0307)",
+      "phase": "review",
+      "phaseDetail": "Tracking issue #324. Coordinated set of SIMDs in various states: SIMD-0083 (Relax Entry Constraints) accepted; SIMD-0192/0290/0295/0297 (relaxation SIMDs) in review; SIMD-0298 (consensus on execution) and SIMD-0307 (block footer) in review.",
+      "category": "execution",
+      "shortDescription": "A coordinated set of proposals that decouples consensus voting from transaction execution, allowing validators to vote on a block immediately upon receipt instead of after fully executing it. Prerequisite for multiple concurrent proposers and shorter block times.",
+      "securityImplications": "The current Solana model couples consensus and execution: validators must replay every transaction in a block before voting on it. This provides a strong implicit security property — every voting validator has independently verified that the block's claimed state transitions are correct — but it forces consensus latency to track the slowest computationally-expensive transaction. The async execution roadmap loosens this coupling by allowing votes to be cast on receipt of a structurally-valid block, with execution following asynchronously and reconciled later via a separate consensus channel (SIMD-0298: bank_hash in block footer).\n\nThe security tradeoffs are substantial and not yet fully understood. The relaxation SIMDs (0192, 0290, 0295, 0297) systematically convert what are currently 'protocol violations' (invalidate the block) into 'runtime errors' (transaction fails, block is still valid) — for example, SIMD-0192 makes invalid address-lookup-table references a runtime error rather than a block validity issue. This is necessary because validators voting before execution cannot know which transactions will fail. But it also means an attacker who can construct a block containing many transactions that fail at runtime can cause validators to vote for blocks they would currently reject, with delayed economic impact. The compensating control is SIMD-0298's post-hoc consensus on execution results via the block footer — but this introduces a new consensus failure mode where validators agree on a block but disagree on what executing it produced. The migration also opens the door to multiple concurrent proposers (Constellation), which is its own security story.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": [],
+      "sources": [
+        {"label": "Async Execution roadmap (issue #324)", "url": "https://github.com/solana-foundation/solana-improvement-documents/issues/324"},
+        {"label": "Helius — Asynchronous Program Execution", "url": "https://www.helius.dev/blog/asynchronous-program-execution"},
+        {"label": "SIMD-0083 — Relax Entry Constraints", "url": "https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0083-relax-entry-constraints.md"},
+        {"label": "Original APExB SIMD (PR #45)", "url": "https://github.com/solana-foundation/solana-improvement-documents/pull/45"}
+      ]
+    },
+    {
+      "id": "simd-constellation-mcp",
+      "number": null,
+      "title": "Constellation: Multiple Concurrent Proposers (MCP)",
+      "phase": "draft",
+      "phaseDetail": "Anza published the Constellation whitepaper in March 2026; SIMD not yet formally numbered. Public debate ongoing. Vote expected in 2026 — late Q2 or Q3 estimated.",
+      "category": "consensus",
+      "shortDescription": "Replaces single-leader block proposal with multiple concurrent proposers operating on a 50ms economic tick. Each proposer includes transactions in parallel and broadcasts erasure-coded shreds to attesters; ordering is deterministic once enough symbols are decoded.",
+      "securityImplications": "MCP attacks two security problems that single-leader designs structurally cannot solve. First is censorship resistance: under single-leader, the slot's leader has unilateral inclusion authority for that slot's window, which has been the root cause of pervasive sandwich attacks, oracle-update front-running, and the structural advantages that incentivize private mempools and validator-side MEV extraction. Constellation's erasure-coded multi-proposer model means censoring a transaction requires colluding with a stake-weighted majority of concurrent proposers, raising the cost of inclusion attacks by orders of magnitude. Second is leader-corruption blast radius: today, a compromised leader key can selectively include malicious transactions or reorder for a full slot. Under MCP, the same compromise can affect at most one proposer's contribution to a 50ms tick.\n\nThe security cost is significant added complexity in the proposer-attester protocol. Concurrent proposers can include conflicting transactions touching the same accounts, which the protocol resolves via deterministic post-decode ordering; this introduces new failure modes around fee manipulation (the SIMD requires every fee-payer account to maintain ~0.001 SOL minimum reserve to prevent griefing) and slashing (proposer accountability under MCP is a separate, unresolved design point per the current draft). MCP is also coupled to async execution — without it, validators cannot vote in 50ms on blocks they have not executed. The overall effect is a protocol that is more secure against the censorship and front-running threats but has more places to make implementation mistakes, and the post-Drift threat model (sophisticated long-running social engineering) is largely orthogonal to what MCP addresses.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": ["simd-0326-alpenglow", "simd-async-execution-roadmap"],
+      "sources": [
+        {"label": "Constellation proposal tracker (Anza)", "url": "https://constellation.anza.xyz/"},
+        {"label": "Helius — What is Constellation?", "url": "https://www.helius.dev/blog/constellation"},
+        {"label": "SolanaFloor — community divided", "url": "https://solanafloor.com/news/solana-community-divided-over-anza-mcp-proposal-impact-validators-perps-trading"},
+        {"label": "Messari — State of Solana Q4 2025", "url": "https://messari.io/report/state-of-solana-q4-2025"}
+      ]
+    },
+    {
+      "id": "simd-0153-zk-elgamal-proof-program",
+      "number": 153,
+      "title": "ZK ElGamal Proof Program (currently disabled pending re-audit)",
+      "phase": "scheduled",
+      "phaseDetail": "Accepted and originally activated. Disabled via feature gate at epoch 805 (June 19, 2025) following critical Fiat-Shamir vulnerability disclosure. Pending re-enablement after Code4rena audit (August 2025) and follow-on fixes.",
+      "category": "cryptography",
+      "shortDescription": "Native built-in program for verifying zero-knowledge proofs over the ElGamal encryption scheme. Required for Token-2022 confidential transfers (encrypted balances and transfer amounts). Currently disabled on mainnet and devnet.",
+      "securityImplications": "SIMD-0153 has a unique status in the security-relevant SIMD landscape: it is the only major SIMD that has been activated, exploited (in proof-of-concept), patched twice, and then disabled outright pending re-audit. The original April 2025 vulnerability arose because certain algebraic components were omitted from the Fiat-Shamir hashing process — meaning an attacker could construct arbitrary 'proofs' that the program would accept as valid, allowing forgery of confidential token balances and arbitrary minting of confidential Token-2022 supply. The April 2025 patch addressed the immediate issue. A second, separate vulnerability in the same program led to the broader June 2025 decision to disable confidential transfers entirely (via Token-2022 program update on June 11, then ZK ElGamal program disable on June 19) and submit the entire codebase for a Code4rena public audit (August 2025).\n\nThe security implication for protocol designers is the difficulty of native-built-in cryptographic primitives. Unlike a regular on-chain program that can be upgraded by its authority, the ZK ElGamal Proof program is part of the validator client itself — patching it requires a coordinated software upgrade across a supermajority of stake, and disabling it requires a feature gate activation. The April 2025 incident response (super-majority adoption of the patch within ~48 hours) was successful but reveals an operational dependency: a critical-severity bug in a native program requires hours of coordinated validator action to remediate, with no way to disable the feature in the meantime. The re-enabled version of SIMD-0153, when it arrives, will reflect lessons learned — but the fundamental constraint remains, and any future native zero-knowledge or cryptographic SIMD inherits the same operational risk profile.",
+      "relatedIncidents": ["zk-elgamal-vulnerability-apr-2025", "zk-elgamal-disable-jun-2025"],
+      "supersedes": ["simd-zk-token-proof-program"],
+      "dependencies": [],
+      "sources": [
+        {"label": "SIMD-0153 (proposal)", "url": "https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0153-elgamal-proof-program.md"},
+        {"label": "Solana — May 2025 post-mortem", "url": "https://solana.com/news/post-mortem-may-2-2025"},
+        {"label": "Solana — June 2025 post-mortem", "url": "https://solana.com/news/post-mortem-june-25-2025"},
+        {"label": "Code4rena audit scope (August 2025)", "url": "https://github.com/code-423n4/2025-08-solana-foundation"}
+      ]
+    },
+    {
+      "id": "simd-0296-bls-syscalls",
+      "number": 296,
+      "title": "BLS12-381 syscalls",
+      "phase": "review",
+      "phaseDetail": "In review (last updated November 2025). Required for Alpenglow.",
+      "category": "cryptography",
+      "shortDescription": "Adds a new family of syscalls providing native support for cryptographic operations on the BLS12-381 elliptic curve — pairing-friendly curve required for efficient aggregate signatures.",
+      "securityImplications": "BLS12-381 syscalls are the substrate that makes Alpenglow's off-chain vote aggregation efficient. Without native support, BLS verification would have to run as on-chain BPF code, which is orders of magnitude slower and would defeat the latency improvements Alpenglow targets. The 128-bit security level provided by BLS12-381 is the standard for production aggregate-signature schemes and matches the level used by Ethereum's beacon chain.\n\nThe security consideration most worth flagging is that adding native cryptographic syscalls is precisely the surface that produced the SIMD-0153 ZK ElGamal incidents: native primitives cannot be upgraded as easily as on-chain programs, and bugs in their implementation are typically critical-severity. The BLS12-381 syscalls will be exposed to all on-chain programs, not just consensus, meaning any application that wants to verify BLS signatures (cross-chain bridges, threshold signing schemes, validator-attestation protocols) gains a new high-trust building block. Implementation correctness — particularly subgroup checks, point validation, and protection against invalid-curve attacks — is critical and will require the same audit rigor that the post-disclosure SIMD-0153 codebase received.",
+      "relatedIncidents": [],
+      "supersedes": [],
+      "dependencies": [],
+      "sources": [
+        {"label": "SIMD-0296 (proposal)", "url": "https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0296-bls-syscalls.md"},
+        {"label": "SIMD Mirror (status tracker)", "url": "https://simd.mixy.one/"}
+      ]
+    }
+  ]
+}

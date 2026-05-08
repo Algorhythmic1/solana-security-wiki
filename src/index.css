@@ -1167,3 +1167,190 @@ html[data-theme="light"] .video-resource-kind {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+/* Phase range slider (SIMDs page) — tighter block than the home date slider */
+.phase-range-slider.timeline-slider {
+  margin: 0.45rem 0 0.65rem;
+  padding: 0.25rem 0;
+}
+
+.phase-range-slider .timeline-slider-header {
+  margin-bottom: 0.2rem;
+}
+
+.phase-range-slider .timeline-slider-hint {
+  margin-bottom: 0.35rem;
+}
+
+.phase-range-slider .timeline-slider-axis {
+  margin-top: 0.2rem;
+}
+
+.phase-range-slider .phase-range-slider-bar.timeline-slider-track-hit {
+  margin-bottom: 0.15rem;
+}
+
+.phase-range-slider-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.phase-range-slider-bar {
+  /* Keep in sync with PHASE_RAIL_CENTER_PX in PhaseRangeSlider.tsx */
+  --phase-rail-y: 11px;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  border-radius: 6px;
+}
+
+/* Rail + handles sit under the phase labels; dots still stack upward from the bottom */
+.phase-range-slider-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--phase-rail-y);
+  transform: translateY(-50%);
+  height: 8px;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.phase-range-slider-bar .timeline-slider-range-fill {
+  top: var(--phase-rail-y);
+}
+
+.phase-range-slider-bar .timeline-slider-handle {
+  top: var(--phase-rail-y);
+}
+
+.phase-range-slider-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.phase-range-slider-cell {
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.4rem;
+  min-height: 2.65rem;
+}
+
+.phase-range-slider-cell-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.phase-range-slider-fill {
+  z-index: 1;
+  opacity: 0.92;
+}
+
+.phase-range-slider-axis .timeline-slider-axis-center {
+  font-size: 0.68rem;
+}
+
+/* SIMDs page */
+.simd-filters {
+  margin-top: 1rem;
+}
+
+.simd-timeline .simd-card h2 {
+  font-size: 1.15rem;
+  margin: 0.35rem 0 0.25rem;
+  font-family: var(--font-display);
+}
+
+.simd-card-title {
+  color: var(--text);
+}
+
+.simd-phase-detail {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.simd-section {
+  margin-top: 1rem;
+}
+
+.simd-section-title {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.35rem;
+}
+
+.simd-section-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.simd-analysis .simd-section-body + .simd-section-body {
+  margin-top: 0.65rem;
+}
+
+.simd-inline-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.92rem;
+}
+
+.simd-inline-list li {
+  margin-bottom: 0.3rem;
+}
+
+.simd-sources {
+  font-size: 0.9rem;
+}
+
+.simd-code {
+  font-size: 0.85em;
+  word-break: break-word;
+}
+
+.pill.simd-phase-draft {
+  border-color: var(--pill-medium-bd);
+  color: var(--pill-medium-fg);
+}
+
+.pill.simd-phase-review {
+  border-color: var(--pill-high-bd);
+  color: var(--pill-high-fg);
+}
+
+.pill.simd-phase-scheduled {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+html[data-theme="light"] .pill.simd-phase-scheduled {
+  color: var(--text);
+}
+
+.simd-num-pill {
+  font-variant-numeric: tabular-nums;
+}

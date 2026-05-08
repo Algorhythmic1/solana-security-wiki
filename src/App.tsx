@@ -7,6 +7,7 @@ import { TrendsPage } from "./pages/TrendsPage";
 import { ChecklistPage } from "./pages/ChecklistPage";
 import { VideosPage } from "./pages/VideosPage";
 import { MiscResourcesPage } from "./pages/MiscResourcesPage";
+import { SimdsPage } from "./pages/SimdsPage";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/checklist" element={<ChecklistPage />} />
           <Route path="/videos" element={<VideosPage />} />
           <Route path="/resources" element={<MiscResourcesPage />} />
+          <Route path="/simds" element={<SimdsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

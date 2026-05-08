@@ -152,7 +152,7 @@ export function Layout() {
           </li>
         </ul>
 
-        <div className="nav-section-title">Meta articles</div>
+        <div className="nav-section-title">Articles</div>
         <ul className="nav-list">
           <li>
             <Link to="/trends">Exploitation trends &amp; defender focus</Link>
@@ -165,6 +165,9 @@ export function Layout() {
           </li>
           <li>
             <Link to="/resources">Miscellaneous resources</Link>
+          </li>
+          <li>
+            <Link to="/simds">SIMDs (security)</Link>
           </li>
         </ul>
 
