@@ -148,7 +148,7 @@ export function Layout() {
         <div className="nav-section-title">Explore</div>
         <ul className="nav-list">
           <li>
-            <Link to="/">Timeline &amp; search</Link>
+            <Link to="/">Incident Timeline &amp; search</Link>
           </li>
         </ul>
 
