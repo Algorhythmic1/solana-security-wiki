@@ -105,7 +105,15 @@ export function SimdsPage() {
         end state—or remain gated, in flux, or dependent on follow-on work. Each
         entry includes a short summary, lifecycle phase, and our analysis of the
         security tradeoffs. Primary sources are linked; verify details against the
-        official SIMD repo.
+        official SIMD repo. Sources: <br /> 
+        <ul>
+        <li><a href="https://github.com/solana-foundation/solana-improvement-documents" target="_blank" rel="noreferrer">
+          solana-improvement-documents
+        </a></li>
+        <li><a href="https://simd.mixy.one" target="_blank" rel="noreferrer">
+          SIMD Mirror (status tracker)
+        </a></li>
+        </ul>
       </p>
 
       <div className="filters simd-filters">
